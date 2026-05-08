@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tus preguntas, respondidas · Brava × DJ Create</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:    #FAF7F2;
+  --cream-d:  #F0E8DC;
+  --white:    #FFFDF9;
+  --espresso: #1C1008;
+  --esp-s:    #3B2112;
+  --terra:    #C05A2A;
+  --terra-l:  #E5855A;
+  --gold:     #C8923A;
+  --gold-l:   #E8C07A;
+  --sage:     #7A9670;
+  --muted:    #9A8878;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans:  'Jost', sans-serif;
+  --ease: cubic-bezier(.4,0,.2,1);
+  --pad: clamp(1.4rem,5vw,3.5rem);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--espresso);font-family:var(--sans);font-weight:300;line-height:1.75;overflow-x:hidden;font-size:clamp(14px,3.8vw,16px)}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 var(--pad);height:64px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,box-shadow .4s}
+#nav.scrolled{background:rgba(250,247,242,.94);backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(28,16,8,.07)}
+.nav-logo{font-family:var(--serif);font-size:clamp(1rem,3vw,1.3rem);font-weight:500;color:var(--white);text-decoration:none;transition:color .3s}
+.nav-logo em{font-style:italic;color:var(--gold-l)}
+#nav.scrolled .nav-logo{color:var(--espresso)}
+#nav.scrolled .nav-logo em{color:var(--terra)}
+.nav-pill{background:var(--terra);color:var(--white);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.45rem 1.2rem;border-radius:2px;text-decoration:none;transition:background .3s}
+.nav-pill:hover{background:var(--esp-s)}
+
+/* HERO */
+#hero{min-height:100svh;background:var(--esp-s);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:clamp(5rem,12vw,9rem) var(--pad) clamp(4rem,8vw,7rem);position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;top:-150px;right:-150px;width:clamp(300px,70vw,650px);height:clamp(300px,70vw,650px);border-radius:50%;background:radial-gradient(circle,rgba(192,90,42,.22) 0%,transparent 68%);pointer-events:none}
+#hero::after{content:'';position:absolute;bottom:-80px;left:-80px;width:clamp(200px,50vw,450px);height:clamp(200px,50vw,450px);border-radius:50%;background:radial-gradient(circle,rgba(200,146,58,.15) 0%,transparent 68%);pointer-events:none}
+.hero-deco{font-family:var(--serif);font-size:clamp(6rem,28vw,18rem);font-weight:300;font-style:italic;color:rgba(255,253,249,.03);position:absolute;bottom:-2rem;right:var(--pad);line-height:1;user-select:none;pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:820px}
+.hero-eyebrow{font-size:clamp(.62rem,2vw,.72rem);font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--terra-l);display:flex;align-items:center;gap:.8rem;margin-bottom:1.4rem;opacity:0;animation:fadeUp .9s .3s var(--ease) forwards}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--terra-l);flex-shrink:0}
+.hero-title{font-family:var(--serif);font-size:clamp(2.8rem,10vw,6.5rem);font-weight:300;line-height:1.0;color:var(--white);margin-bottom:.6em;opacity:0;animation:fadeUp .9s .5s var(--ease) forwards}
+.hero-title em{font-style:italic;color:var(--gold-l)}
+.hero-sub{font-size:clamp(.92rem,2.8vw,1.1rem);color:rgba(255,253,249,.62);max-width:540px;line-height:1.85;margin-bottom:2.5rem;opacity:0;animation:fadeUp .9s .7s var(--ease) forwards}
+.hero-badge{display:inline-flex;align-items:center;gap:.6rem;background:rgba(255,253,249,.07);border:1px solid rgba(255,253,249,.14);padding:.6rem 1.2rem;border-radius:2px;font-size:.8rem;color:rgba(255,253,249,.6);opacity:0;animation:fadeUp .9s .9s var(--ease) forwards}
+.hero-badge strong{color:var(--gold-l);font-weight:500}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* INTRO BAND */
+.intro-band{background:var(--terra);padding:clamp(1rem,3vw,1.5rem) var(--pad);display:flex;align-items:center;justify-content:center;gap:clamp(.8rem,3vw,2rem);flex-wrap:wrap}
+.intro-band span{font-family:var(--serif);font-size:clamp(.95rem,2.5vw,1.15rem);font-style:italic;color:var(--white);opacity:.92;white-space:nowrap}
+.intro-band .dot{color:var(--gold-l);opacity:.7;flex-shrink:0}
+
+/* Q&A SECTIONS */
+.qa-section{padding:clamp(4rem,9vw,8rem) 0;border-bottom:1px solid rgba(28,16,8,.07)}
+.qa-section:last-of-type{border-bottom:none}
+.container{max-width:960px;margin:0 auto;padding:0 var(--pad)}
+
+/* alternating layout */
+.qa-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:clamp(2.5rem,6vw,6rem);align-items:start}
+.qa-grid.reverse{grid-template-columns:1.6fr 1fr}
+.qa-grid.reverse .qa-left{order:2}
+.qa-grid.reverse .qa-right{order:1}
+
+.qa-num{font-family:var(--serif);font-size:clamp(4rem,14vw,9rem);font-weight:300;font-style:italic;color:rgba(192,90,42,.1);line-height:1;margin-bottom:-.5rem;display:block;user-select:none}
+.qa-tag{font-size:.64rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--terra);margin-bottom:.7rem;display:block}
+.qa-question{font-family:var(--serif);font-size:clamp(1.5rem,4vw,2.2rem);font-weight:400;line-height:1.2;color:var(--espresso);margin-bottom:1.5rem}
+.qa-question em{font-style:italic;color:var(--terra)}
+
+.qa-answer{font-size:clamp(.88rem,2.5vw,1rem);color:var(--esp-s);line-height:1.85}
+.qa-answer p+p{margin-top:1rem}
+.qa-answer strong{color:var(--espresso);font-weight:500}
+
+/* Visual card / callout on the right */
+.qa-card{background:var(--white);padding:clamp(1.5rem,4vw,2.5rem);position:relative}
+.qa-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--terra)}
+.qa-card-label{font-size:.62rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--terra);margin-bottom:.8rem}
+.qa-card-value{font-family:var(--serif);font-size:clamp(1.6rem,5vw,2.6rem);font-weight:300;color:var(--espresso);line-height:1.15;margin-bottom:.6rem}
+.qa-card-value em{font-style:italic;color:var(--terra)}
+.qa-card p{font-size:.85rem;color:var(--muted);line-height:1.7}
+
+/* Dark card */
+.qa-card.dark{background:var(--esp-s);color:var(--white)}
+.qa-card.dark::before{background:var(--gold)}
+.qa-card.dark .qa-card-label{color:var(--gold-l)}
+.qa-card.dark .qa-card-value{color:var(--white)}
+.qa-card.dark .qa-card-value em{color:var(--gold-l)}
+.qa-card.dark p{color:rgba(255,253,249,.6)}
+
+/* Check list */
+.check-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-top:1.2rem}
+.check-list li{display:flex;align-items:flex-start;gap:.7rem;font-size:clamp(.82rem,2.5vw,.9rem);color:var(--esp-s);line-height:1.5}
+.check-list li::before{content:'✓';color:var(--sage);font-size:.8rem;font-weight:700;margin-top:.15rem;flex-shrink:0}
+.check-list.gold li::before{color:var(--gold)}
+.check-list.white li{color:rgba(255,253,249,.75)}
+.check-list.white li::before{color:var(--gold-l)}
+
+/* Highlight box */
+.highlight{background:var(--esp-s);color:var(--white);padding:clamp(1.5rem,4vw,2.5rem);border-radius:2px;margin-top:2rem;position:relative;overflow:hidden}
+.highlight::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--gold)}
+.highlight-label{font-size:.62rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-l);margin-bottom:.6rem}
+.highlight p{font-size:clamp(.86rem,2.5vw,1rem);color:rgba(255,253,249,.85);line-height:1.8}
+.highlight strong{color:var(--white);font-weight:500}
+
+/* Speed meter */
+.speed-meter{margin-top:1.5rem}
+.speed-row{display:flex;align-items:center;gap:1rem;margin-bottom:.8rem}
+.speed-label{font-size:.78rem;color:var(--muted);width:100px;flex-shrink:0}
+.speed-bar-wrap{flex:1;height:8px;background:rgba(28,16,8,.08);border-radius:4px;overflow:hidden}
+.speed-bar{height:100%;border-radius:4px;background:var(--sage);width:0;transition:width 1.2s var(--ease)}
+.speed-bar.terra{background:var(--terra)}
+.speed-bar.gold{background:var(--gold)}
+.speed-score{font-family:var(--serif);font-size:1.1rem;font-weight:500;color:var(--sage);width:36px;text-align:right;flex-shrink:0}
+.speed-score.terra{color:var(--terra)}
+.speed-score.gold{color:var(--gold)}
+
+/* Ownership timeline */
+.timeline{display:flex;flex-direction:column;gap:0;margin-top:1.5rem;position:relative}
+.timeline::before{content:'';position:absolute;left:19px;top:20px;bottom:20px;width:1px;background:rgba(28,16,8,.1)}
+.tl-item{display:flex;align-items:flex-start;gap:1rem;padding:.9rem 0}
+.tl-dot{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1rem;font-weight:500;position:relative;z-index:1}
+.tl-dot.filled{background:var(--terra);color:var(--white)}
+.tl-dot.outline{background:var(--cream);border:1px solid rgba(28,16,8,.12);color:var(--muted)}
+.tl-text strong{display:block;font-size:.85rem;font-weight:600;color:var(--espresso);margin-bottom:.1rem}
+.tl-text span{font-size:.8rem;color:var(--muted)}
+
+/* CTA final */
+#cta{background:var(--esp-s);padding:clamp(5rem,10vw,9rem) var(--pad);text-align:center;position:relative;overflow:hidden}
+#cta::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(192,90,42,.18) 0%,transparent 65%);pointer-events:none}
+.cta-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+.cta-eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--terra-l);margin-bottom:1rem;display:block}
+.cta-title{font-family:var(--serif);font-size:clamp(2.5rem,8vw,4.5rem);font-weight:300;line-height:1.05;color:var(--white);margin-bottom:1rem}
+.cta-title em{font-style:italic;color:var(--gold-l)}
+.cta-sub{font-size:clamp(.9rem,2.5vw,1.05rem);color:rgba(255,253,249,.55);line-height:1.8;margin-bottom:3rem}
+.cta-actions{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+.btn-wa{display:inline-flex;align-items:center;gap:.7rem;background:#25D366;color:var(--white);padding:.9rem 2rem;font-size:.82rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:background .3s,transform .2s}
+.btn-wa:hover{background:#20b858;transform:translateY(-2px)}
+.btn-mail{display:inline-flex;align-items:center;gap:.7rem;border:1px solid rgba(255,253,249,.25);color:rgba(255,253,249,.75);padding:.9rem 2rem;font-size:.82rem;font-weight:400;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all .3s}
+.btn-mail:hover{border-color:var(--terra-l);color:var(--terra-l);transform:translateY(-2px)}
+
+/* Footer */
+footer{background:var(--espresso);padding:clamp(1.5rem,4vw,2.5rem) var(--pad);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem}
+footer p{font-size:.76rem;color:rgba(255,253,249,.3)}
+footer a{color:rgba(255,253,249,.45);text-decoration:none;font-size:.76rem;transition:color .3s}
+footer a:hover{color:var(--gold-l)}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}
+
+/* RESPONSIVE */
+@media(max-width:680px){
+  .qa-grid,.qa-grid.reverse{grid-template-columns:1fr}
+  .qa-grid.reverse .qa-left,.qa-grid.reverse .qa-right{order:unset}
+  .intro-band{gap:.5rem}
+  .intro-band .dot{display:none}
+  .intro-band span:nth-child(n+5){display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">DJ <em>Create</em> × Brava</a>
+  <a href="#cta" class="nav-pill">Hablamos 💬</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Respuestas para Brava Coffee & Brunch</div>
+    <h1 class="hero-title">Todo claro.<br>Antes de <em>empezar.</em></h1>
+    <p class="hero-sub">Has hecho las preguntas correctas. Aquí están las respuestas, una a una, sin rodeos. Porque si vamos a trabajar juntos, tienes que tener todo el control.</p>
+    <div class="hero-badge">
+      <span>📋</span>
+      <span>8 preguntas · <strong>8 respuestas directas</strong></span>
+    </div>
+  </div>
+  <div class="hero-deco" aria-hidden="true">8</div>
+</section>
+
+<!-- BANDA -->
+<div class="intro-band">
+  <span>Plataforma</span><span class="dot">·</span>
+  <span>Dominio</span><span class="dot">·</span>
+  <span>Accesos</span><span class="dot">·</span>
+  <span>Mantenimiento</span><span class="dot">·</span>
+  <span>Propiedad</span><span class="dot">·</span>
+  <span>SEO</span><span class="dot">·</span>
+  <span>Velocidad</span>
+</div>
+
+<!-- Q1 PLATAFORMA -->
+<div class="qa-section">
+  <div class="container">
+    <div class="qa-grid">
+      <div class="qa-left reveal">
+        <span class="qa-num" aria-hidden="true">01</span>
+        <span class="qa-tag">La plataforma</span>
+        <h2 class="qa-question">¿WordPress o <em>código propio?</em></h2>
+        <div class="qa-answer">
+          <p>La web de Brava estará construida en <strong>código propio</strong> — HTML, CSS y JavaScript puro, desarrollado desde cero exclusivamente para vosotros.</p>
+          <p>No usamos WordPress, ni Wix, ni Squarespace, ni plantillas de ningún tipo. No hay plugins que actualizar, no hay licencias que pagar, no hay vulnerabilidades de terceros.</p>
+          <p>El resultado es un sitio <strong>único, más rápido y más seguro</strong> que cualquier alternativa basada en gestor de contenidos.</p>
+        </div>
+      </div>
+      <div class="qa-right reveal reveal-d2">
+        <div class="qa-card">
+          <div class="qa-card-label">Lo que esto significa para Brava</div>
+          <div class="qa-card-value">100%<em> vuestro</em></div>
+          <p>Sin dependencias externas. Sin "tu web no funciona porque actualizaron un plugin". Sin costes ocultos de licencias.</p>
+          <ul class="check-list" style="margin-top:1.2rem">
+            <li>Código escrito a medida para Brava</li>
+            <li>Sin plugins que caduquen o den problemas</li>
+            <li>Sin licencias anuales sorpresa</li>
+            <li>Más rápido que cualquier WordPress</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q2 DOMINIO -->
+<div class="qa-section" style="background:var(--cream-d)">
+  <div class="container">
+    <div class="qa-grid reverse">
+      <div class="qa-left reveal reveal-d1">
+        <div class="qa-card dark">
+          <div class="qa-card-label">El dominio</div>
+          <div class="qa-card-value"><em>bravacoffee.es</em><br>es de Brava.</div>
+          <p>Registrado a nombre de Brava Coffee & Brunch desde el primer día. Nosotros gestionamos el trámite, pero el titular eres tú.</p>
+          <ul class="check-list white" style="margin-top:1.2rem">
+            <li>Registrado a nombre de Brava, no de DJ Create</li>
+            <li>Acceso y credenciales entregados al cliente</li>
+            <li>Renovación anual avisada con antelación</li>
+          </ul>
+        </div>
+      </div>
+      <div class="qa-right reveal">
+        <span class="qa-num" aria-hidden="true">02</span>
+        <span class="qa-tag">El dominio</span>
+        <h2 class="qa-question">¿El dominio será <em>siempre vuestro?</em></h2>
+        <div class="qa-answer">
+          <p>Siempre. Sin excepción. El dominio se registra a nombre de <strong>Brava Coffee & Brunch</strong> desde el primer día y así permanece independientemente de lo que ocurra.</p>
+          <p>Nosotros gestionamos el proceso para simplificároslo, pero la titularidad es completamente vuestra. Os entregamos todos los accesos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q3 ACCESOS -->
+<div class="qa-section">
+  <div class="container">
+    <div class="qa-grid">
+      <div class="qa-left reveal">
+        <span class="qa-num" aria-hidden="true">03</span>
+        <span class="qa-tag">Hosting y accesos</span>
+        <h2 class="qa-question">¿Tendréis acceso <em>completo?</em></h2>
+        <div class="qa-answer">
+          <p>El hosting lo gestionamos nosotros para que no tengáis que preocuparos de nada técnico — eso es exactamente para lo que sirve el mantenimiento mensual.</p>
+          <p>En caso de que en cualquier momento lo necesitéis — por lo que sea — os entregamos todos los accesos al servidor sin ningún problema y sin ningún coste adicional.</p>
+          <p><strong>Nunca os dejaremos sin acceso a vuestra propia web.</strong></p>
+        </div>
+      </div>
+      <div class="qa-right reveal reveal-d2">
+        <div class="qa-card">
+          <div class="qa-card-label">Cómo funciona</div>
+          <div class="qa-card-value">Nosotros <em>gestionamos.</em><br>Vosotros <em>mandáis.</em></div>
+          <p>DJ Create se ocupa de todo lo técnico. Pero si en algún momento queréis los accesos, los tenéis en 24 horas.</p>
+        </div>
+        <div class="highlight" style="margin-top:1rem">
+          <div class="highlight-label">En la práctica</div>
+          <p>Si mañana decidís llevar el hosting vosotros o cambiar de proveedor, os damos todo: archivos, base de datos, configuración. <strong>Sin retención, sin coste.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q4 MODIFICACIONES -->
+<div class="qa-section" style="background:var(--cream-d)">
+  <div class="container">
+    <div class="qa-grid reverse">
+      <div class="qa-left reveal reveal-d1">
+        <div class="qa-card dark">
+          <div class="qa-card-label">Cambios básicos</div>
+          <div class="qa-card-value">Carta, horarios,<br>fotos — <em>incluido.</em></div>
+          <p>Cualquier cambio básico forma parte del mantenimiento mensual. No necesitáis saber nada de código. Nos lo decís y lo hacemos nosotros, rápido.</p>
+        </div>
+      </div>
+      <div class="qa-right reveal">
+        <span class="qa-num" aria-hidden="true">04</span>
+        <span class="qa-tag">Modificaciones</span>
+        <h2 class="qa-question">¿Podréis cambiar <em>cosas vosotros?</em></h2>
+        <div class="qa-answer">
+          <p>Sí, pero de la forma más cómoda posible: <strong>nos lo decís por WhatsApp y lo cambiamos nosotros</strong>. Sin que tengáis que tocar nada técnico.</p>
+          <p>Actualizar la carta, cambiar un precio, subir una foto nueva, modificar el horario — todo eso entra dentro del mantenimiento mensual sin coste adicional.</p>
+          <p>Al estar hecha en código y no en WordPress, los cambios son más rápidos y sin riesgo de romper nada. Vosotros pedís, nosotros ejecutamos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q5 MANTENIMIENTO -->
+<div class="qa-section">
+  <div class="container">
+    <div class="qa-grid">
+      <div class="qa-left reveal">
+        <span class="qa-num" aria-hidden="true">05</span>
+        <span class="qa-tag">El mantenimiento</span>
+        <h2 class="qa-question">¿Qué incluye <em>exactamente</em> el mantenimiento?</h2>
+        <div class="qa-answer">
+          <p>Los 30€ al mes no son solo "el hosting". Son un servicio completo para que la web funcione perfecta sin que tengáis que pensar en ella.</p>
+        </div>
+        <ul class="check-list" style="margin-top:1.5rem">
+          <li>Hosting activo y servidor funcionando 24/7</li>
+          <li>Copias de seguridad periódicas automáticas</li>
+          <li>Seguridad del servidor y actualizaciones</li>
+          <li>Cambios en carta, precios y horarios</li>
+          <li>Actualización de fotos y textos</li>
+          <li>Resolución de cualquier incidencia técnica</li>
+          <li>Soporte por WhatsApp en horario laboral</li>
+        </ul>
+      </div>
+      <div class="qa-right reveal reveal-d2">
+        <div class="qa-card dark">
+          <div class="qa-card-label">El precio en perspectiva</div>
+          <div class="qa-card-value"><em>1€</em> al día.</div>
+          <p>30€ al mes es el precio de un café al día. Si la web trae aunque sea 3 o 4 clientes nuevos al mes que no hubieran llegado de otra forma, ya está más que pagada.</p>
+        </div>
+        <div style="margin-top:1rem;padding:1.5rem;background:var(--white);border-left:3px solid var(--gold)">
+          <p style="font-family:var(--serif);font-size:1.2rem;font-style:italic;color:var(--espresso);line-height:1.5">"Todo lo que necesitáis, sin sorpresas al final del mes."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q6 PROPIEDAD -->
+<div class="qa-section" style="background:var(--cream-d)">
+  <div class="container">
+    <div class="qa-grid reverse">
+      <div class="qa-left reveal reveal-d1">
+        <div class="qa-num" aria-hidden="true" style="color:rgba(192,90,42,.08)">06</div>
+        <div class="timeline">
+          <div class="tl-item"><div class="tl-dot filled">1</div><div class="tl-text"><strong>Firmáis el contrato</strong><span>El proyecto es de Brava desde el minuto 1</span></div></div>
+          <div class="tl-item"><div class="tl-dot filled">2</div><div class="tl-text"><strong>Pagáis el desarrollo</strong><span>Todos los archivos y el código son vuestros</span></div></div>
+          <div class="tl-item"><div class="tl-dot outline">3</div><div class="tl-text"><strong>Si algún día finalizáis</strong><span>Os entregamos todo: código, archivos, accesos</span></div></div>
+          <div class="tl-item"><div class="tl-dot outline">∞</div><div class="tl-text"><strong>La web sigue siendo vuestra</strong><span>Sin condiciones, sin letra pequeña</span></div></div>
+        </div>
+      </div>
+      <div class="qa-right reveal">
+        <span class="qa-tag">Propiedad</span>
+        <h2 class="qa-question">¿La web es vuestra si <em>dejamos de trabajar juntos?</em></h2>
+        <div class="qa-answer">
+          <p>Sí, completamente. <strong>La web es vuestra desde el momento en que se paga el total del desarrollo.</strong></p>
+          <p>Si en algún momento decidís seguir por otro camino, os entregamos todos los archivos, todos los accesos y todo el código. Sin retención, sin condiciones, sin costes adicionales.</p>
+          <p>No tenemos ningún interés en atáros a nosotros. Si os quedáis es porque estáis contentas con el trabajo, no porque os hayamos puesto un candado.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q7 SEO -->
+<div class="qa-section">
+  <div class="container">
+    <div class="qa-grid">
+      <div class="qa-left reveal">
+        <span class="qa-num" aria-hidden="true">07</span>
+        <span class="qa-tag">El SEO</span>
+        <h2 class="qa-question">¿Configuración básica o <em>posicionamiento real?</em></h2>
+        <div class="qa-answer">
+          <p>Trabajo de posicionamiento real. No solo "ponemos etiquetas" — trabajamos para que <strong>Brava aparezca cuando alguien busca en Google</strong>.</p>
+          <p>El objetivo concreto: que cuando alguien en Murcia escriba "desayunos La Ñora", "café brunch Murcia" o "brunch cerca de mí", Brava aparezca en los primeros resultados.</p>
+        </div>
+        <ul class="check-list" style="margin-top:1.5rem">
+          <li>Optimización de títulos y descripciones para Google</li>
+          <li>Estructura semántica correcta del código</li>
+          <li>Alta y configuración en Google Search Console</li>
+          <li>Optimización de Google My Business</li>
+          <li>Palabras clave locales integradas en el contenido</li>
+          <li>Velocidad de carga como factor de posicionamiento</li>
+        </ul>
+      </div>
+      <div class="qa-right reveal reveal-d2">
+        <div class="qa-card dark">
+          <div class="qa-card-label">La diferencia</div>
+          <div class="qa-card-value">SEO básico<br>vs <em>SEO local.</em></div>
+          <p>El SEO básico es poner etiquetas. El SEO local es conseguir que Brava aparezca cuando alguien en La Ñora o Murcia busca un sitio para desayunar. Eso es lo que hacemos.</p>
+        </div>
+        <div class="highlight" style="margin-top:1rem">
+          <div class="highlight-label">Resultado esperado</div>
+          <p>En 2–3 meses desde el lanzamiento, Brava debería aparecer en búsquedas locales relevantes. <strong>Los efectos del SEO se acumulan con el tiempo.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Q8 PAGESPEED -->
+<div class="qa-section" style="background:var(--cream-d)">
+  <div class="container">
+    <div class="qa-grid reverse">
+      <div class="qa-left reveal reveal-d1">
+        <div class="qa-card dark">
+          <div class="qa-card-label">Objetivo Google PageSpeed</div>
+          <div class="qa-card-value"><em>90+</em> / 100</div>
+          <p>El nivel que Google premia con mejor posicionamiento. La web de Brava estará construida para alcanzarlo.</p>
+          <div class="speed-meter" id="speedMeter">
+            <div class="speed-row">
+              <span class="speed-label">Rendimiento</span>
+              <div class="speed-bar-wrap"><div class="speed-bar" data-width="94"></div></div>
+              <span class="speed-score">94</span>
+            </div>
+            <div class="speed-row">
+              <span class="speed-label">Accesibilidad</span>
+              <div class="speed-bar-wrap"><div class="speed-bar gold" data-width="97"></div></div>
+              <span class="speed-score gold">97</span>
+            </div>
+            <div class="speed-row">
+              <span class="speed-label">SEO técnico</span>
+              <div class="speed-bar-wrap"><div class="speed-bar" data-width="98"></div></div>
+              <span class="speed-score">98</span>
+            </div>
+            <div class="speed-row">
+              <span class="speed-label">Buenas prácticas</span>
+              <div class="speed-bar-wrap"><div class="speed-bar gold" data-width="96"></div></div>
+              <span class="speed-score gold">96</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="qa-right reveal">
+        <span class="qa-tag">Velocidad y rendimiento</span>
+        <h2 class="qa-question">¿Optimizada para <em>Google PageSpeed?</em></h2>
+        <div class="qa-answer">
+          <p>Aquí es exactamente donde el código propio marca la diferencia. Sin WordPress, sin plugins, sin peso innecesario.</p>
+          <p>El objetivo es conseguir una puntuación de <strong>90+ en Google PageSpeed</strong> — el umbral que Google considera "bueno" y que premia directamente con mejor posicionamiento.</p>
+          <p>En términos prácticos: <strong>la web de Brava cargará antes de que el cliente haya terminado de leer el nombre.</strong></p>
+        </div>
+        <ul class="check-list" style="margin-top:1.5rem">
+          <li>Imágenes optimizadas y en formato moderno (WebP)</li>
+          <li>Carga diferida de imágenes (lazy loading)</li>
+          <li>Código comprimido sin peso innecesario</li>
+          <li>Caché del navegador configurada</li>
+          <li>Servidor con tiempos de respuesta mínimos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-inner">
+    <span class="cta-eyebrow">¿Todo claro?</span>
+    <h2 class="cta-title">Brava se merece<br>una web <em>a su altura.</em></h2>
+    <p class="cta-sub">Todas las respuestas están sobre la mesa. Si hay algo más que quieras aclarar antes de decidir, estamos aquí. Sin presión, sin compromiso.</p>
+    <div class="cta-actions">
+      <a href="https://wa.me/34XXXXXXXXX" class="btn-wa">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.093.54 4.057 1.484 5.764L0 24l6.404-1.467A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.003-1.368l-.36-.214-3.724.853.869-3.635-.234-.374A9.817 9.817 0 012.182 12C2.182 6.567 6.567 2.182 12 2.182S21.818 6.567 21.818 12 17.433 21.818 12 21.818z"/></svg>
+        Escribir por WhatsApp
+      </a>
+      <a href="mailto:djcreateweb@gmail.com" class="btn-mail">
+        ✉️ &nbsp;djcreateweb@gmail.com
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 DJ Create · Diseño Web Profesional</p>
+  <p>Propuesta preparada para <a href="#">Brava Coffee & Brunch</a> · La Ñora, Murcia</p>
+</footer>
+
+<script>
+// NAV scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 50), {passive:true});
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, {threshold:.1});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// PageSpeed bars animate on scroll
+const speedObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.speed-bar').forEach(bar => {
+        bar.style.width = bar.dataset.width + '%';
+      });
+      speedObs.unobserve(e.target);
+    }
+  });
+}, {threshold:.3});
+const meter = document.getElementById('speedMeter');
+if(meter) speedObs.observe(meter);
+</script>
+</body>
+</html>
